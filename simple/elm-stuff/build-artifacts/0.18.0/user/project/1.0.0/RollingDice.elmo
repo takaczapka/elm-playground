@@ -1,0 +1,54 @@
+var _user$project$RollingDice$init = {ctor: '_Tuple2', _0: 0, _1: _elm_lang$core$Platform_Cmd$none};
+var _user$project$RollingDice$OnResult = function (a) {
+	return {ctor: 'OnResult', _0: a};
+};
+var _user$project$RollingDice$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		if (_p0.ctor === 'OnResult') {
+			return {ctor: '_Tuple2', _0: _p0._0, _1: _elm_lang$core$Platform_Cmd$none};
+		} else {
+			return {
+				ctor: '_Tuple2',
+				_0: model,
+				_1: A2(
+					_elm_lang$core$Random$generate,
+					_user$project$RollingDice$OnResult,
+					A2(_elm_lang$core$Random$int, 1, 6))
+			};
+		}
+	});
+var _user$project$RollingDice$Roll = {ctor: 'Roll'};
+var _user$project$RollingDice$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$button,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(_user$project$RollingDice$Roll),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Roll'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(
+					_elm_lang$core$Basics$toString(model)),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$RollingDice$main = _elm_lang$html$Html$program(
+	{
+		init: _user$project$RollingDice$init,
+		view: _user$project$RollingDice$view,
+		update: _user$project$RollingDice$update,
+		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
+	})();
