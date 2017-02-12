@@ -12,7 +12,9 @@ type alias Player =
   }
 
 new : Player
-new = { id = "0", name = "", level = 1 }
+new = Player "0" "" 1
+--> { id = "1", name = "aa", level = 2 } == Player "1" "aa" 2
+--True : Bool
 
 -- addPerkToPlayer : PerkId -> PlayerId -> Player
--- addPerkToPlayer perkId playerId = 
+-- addPerkToPlayer perkId playerId =

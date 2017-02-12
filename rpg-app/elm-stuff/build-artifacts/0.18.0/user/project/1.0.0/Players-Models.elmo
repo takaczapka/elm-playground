@@ -1,5 +1,5 @@
-var _user$project$Players_Models$new = {id: '0', name: '', level: 1};
 var _user$project$Players_Models$Player = F3(
 	function (a, b, c) {
 		return {id: a, name: b, level: c};
 	});
+var _user$project$Players_Models$new = A3(_user$project$Players_Models$Player, '0', '', 1);

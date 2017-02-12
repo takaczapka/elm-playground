@@ -27,6 +27,7 @@ npm i ace-css@1 font-awesome@4 -S
 ## Elm
 ```
 elm package install elm-lang/html
+elm package install elm-lang/http
 ```
 
 # Running together

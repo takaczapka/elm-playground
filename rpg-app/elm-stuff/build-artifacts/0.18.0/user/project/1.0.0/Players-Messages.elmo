@@ -1,1 +1,3 @@
-var _user$project$Players_Messages$NoOp = {ctor: 'NoOp'};
+var _user$project$Players_Messages$OnFetchAll = function (a) {
+	return {ctor: 'OnFetchAll', _0: a};
+};

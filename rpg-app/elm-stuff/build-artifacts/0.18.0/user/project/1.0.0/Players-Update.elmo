@@ -1,5 +1,9 @@
 var _user$project$Players_Update$update = F2(
 	function (msg, players) {
 		var _p0 = msg;
-		return {ctor: '_Tuple2', _0: players, _1: _elm_lang$core$Platform_Cmd$none};
+		if (_p0._0.ctor === 'Ok') {
+			return {ctor: '_Tuple2', _0: _p0._0._0, _1: _elm_lang$core$Platform_Cmd$none};
+		} else {
+			return {ctor: '_Tuple2', _0: players, _1: _elm_lang$core$Platform_Cmd$none};
+		}
 	});
