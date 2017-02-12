@@ -5,6 +5,60 @@ var _user$project$Players_Commands$memberDecoder = A4(
 	A2(_elm_lang$core$Json_Decode$field, 'name', _elm_lang$core$Json_Decode$string),
 	A2(_elm_lang$core$Json_Decode$field, 'level', _elm_lang$core$Json_Decode$int));
 var _user$project$Players_Commands$collectionDecoder = _elm_lang$core$Json_Decode$list(_user$project$Players_Commands$memberDecoder);
+var _user$project$Players_Commands$updatePlayerUrl = function (playerId) {
+	return A2(_elm_lang$core$Basics_ops['++'], 'http://localhost:4000/players/', playerId);
+};
+var _user$project$Players_Commands$playerJson = function (player) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'id',
+				_1: _elm_lang$core$Json_Encode$string(player.id)
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'name',
+					_1: _elm_lang$core$Json_Encode$string(player.name)
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'level',
+						_1: _elm_lang$core$Json_Encode$int(player.level)
+					},
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$Players_Commands$put = F2(
+	function (url, body) {
+		return _elm_lang$http$Http$request(
+			{
+				method: 'PUT',
+				headers: {ctor: '[]'},
+				url: url,
+				body: body,
+				expect: _elm_lang$http$Http$expectJson(_user$project$Players_Commands$memberDecoder),
+				timeout: _elm_lang$core$Maybe$Nothing,
+				withCredentials: false
+			});
+	});
+var _user$project$Players_Commands$updatePlayer = function (player) {
+	return A2(
+		_elm_lang$http$Http$send,
+		_user$project$Players_Messages$OnPlayerUpdate,
+		A2(
+			_user$project$Players_Commands$put,
+			_user$project$Players_Commands$updatePlayerUrl(player.id),
+			_elm_lang$http$Http$jsonBody(
+				_user$project$Players_Commands$playerJson(player))));
+};
 var _user$project$Players_Commands$fetchAllUrl = 'http://localhost:4000/players';
 var _user$project$Players_Commands$fetchAll = A2(
 	_elm_lang$http$Http$send,

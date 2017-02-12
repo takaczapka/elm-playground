@@ -31,7 +31,12 @@ var _user$project$Players_Edit$btnLevelIncrease = function (player) {
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html_Attributes$class('btn ml1 h1'),
-			_1: {ctor: '[]'}
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					A2(_user$project$Players_Messages$ChangeLevel, player.id, 1)),
+				_1: {ctor: '[]'}
+			}
 		},
 		{
 			ctor: '::',
@@ -52,7 +57,12 @@ var _user$project$Players_Edit$btnLevelDecrease = function (player) {
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html_Attributes$class('btn ml1 h1'),
-			_1: {ctor: '[]'}
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					A2(_user$project$Players_Messages$ChangeLevel, player.id, -1)),
+				_1: {ctor: '[]'}
+			}
 		},
 		{
 			ctor: '::',

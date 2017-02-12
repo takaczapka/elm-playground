@@ -10,10 +10,11 @@ update msg model =
     case msg of
         PlayersMsg subMsg ->
           let
-           ( updatedPlayers, cmd ) = Players.Update.update subMsg model.players
+            ( updatedPlayers, cmd ) = Players.Update.update subMsg model.players
           in
-           ( { model | players = updatedPlayers }, Cmd.map PlayersMsg cmd )
+            ( { model | players = updatedPlayers }, Cmd.map PlayersMsg cmd )
         OnLocationChange location ->
-          let newRoute = parseLocation location
+          let
+            newRoute = parseLocation location
           in
-          ( { model | route = newRoute}, Cmd.none )
+            ( { model | route = newRoute}, Cmd.none )
