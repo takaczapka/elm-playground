@@ -1,3 +1,7 @@
+var _user$project$Players_Messages$ShowPlayer = function (a) {
+	return {ctor: 'ShowPlayer', _0: a};
+};
+var _user$project$Players_Messages$ShowPlayers = {ctor: 'ShowPlayers'};
 var _user$project$Players_Messages$OnFetchAll = function (a) {
 	return {ctor: 'OnFetchAll', _0: a};
 };

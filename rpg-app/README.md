@@ -28,6 +28,8 @@ npm i ace-css@1 font-awesome@4 -S
 ```
 elm package install elm-lang/html
 elm package install elm-lang/http
+elm package install elm-lang/navigation
+elm package install evancz/url-parser
 ```
 
 # Running together
