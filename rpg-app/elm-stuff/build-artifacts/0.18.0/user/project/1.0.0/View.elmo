@@ -1,3 +1,14 @@
+var _user$project$View$errorView = function (error) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(
+				A2(_elm_lang$core$Basics_ops['++'], 'Error occured: ', error)),
+			_1: {ctor: '[]'}
+		});
+};
 var _user$project$View$notFoundView = A2(
 	_elm_lang$html$Html$div,
 	{ctor: '[]'},
@@ -8,21 +19,31 @@ var _user$project$View$notFoundView = A2(
 	});
 var _user$project$View$playerEditPage = F2(
 	function (model, playerId) {
-		var maybePlayer = _elm_lang$core$List$head(
-			A2(
-				_elm_lang$core$List$filter,
-				function (player) {
-					return _elm_lang$core$Native_Utils.eq(player.id, playerId);
-				},
-				model.players));
+		var maybePlayer = A2(
+			_elm_lang$core$Result$map,
+			function (players) {
+				return _elm_lang$core$List$head(
+					A2(
+						_elm_lang$core$List$filter,
+						function (player) {
+							return _elm_lang$core$Native_Utils.eq(player.id, playerId);
+						},
+						players));
+			},
+			model.players);
 		var _p0 = maybePlayer;
-		if (_p0.ctor === 'Just') {
-			return A2(
-				_elm_lang$html$Html$map,
-				_user$project$Messages$PlayersMsg,
-				_user$project$Players_Edit$view(_p0._0));
+		if (_p0.ctor === 'Ok') {
+			if (_p0._0.ctor === 'Just') {
+				return A2(
+					_elm_lang$html$Html$map,
+					_user$project$Messages$PlayersMsg,
+					_user$project$Players_Edit$view(_p0._0._0));
+			} else {
+				return _user$project$View$notFoundView;
+			}
 		} else {
-			return _user$project$View$notFoundView;
+			return _user$project$View$errorView(
+				_elm_lang$core$Basics$toString(_p0._0));
 		}
 	});
 var _user$project$View$page = function (model) {

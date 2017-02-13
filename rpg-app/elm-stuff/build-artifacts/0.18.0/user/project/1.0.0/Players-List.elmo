@@ -186,17 +186,34 @@ var _user$project$Players_List$nav = function (players) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Players_List$view = function (players) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: _user$project$Players_List$nav(players),
-			_1: {
+var _user$project$Players_List$view = function (playersResult) {
+	var _p0 = playersResult;
+	if (_p0.ctor === 'Ok') {
+		var _p1 = _p0._0;
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
 				ctor: '::',
-				_0: _user$project$Players_List$list(players),
+				_0: _user$project$Players_List$nav(_p1),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Players_List$list(_p1),
+					_1: {ctor: '[]'}
+				}
+			});
+	} else {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						'Error occurred: ',
+						_elm_lang$core$Basics$toString(_p0._0))),
 				_1: {ctor: '[]'}
-			}
-		});
+			});
+	}
 };

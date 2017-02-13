@@ -1,6 +1,7 @@
 var _user$project$Models$initialModel = function (route) {
 	return {
-		players: {ctor: '[]'},
+		players: _elm_lang$core$Result$Ok(
+			{ctor: '[]'}),
 		route: route
 	};
 };

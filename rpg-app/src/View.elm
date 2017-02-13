@@ -28,13 +28,20 @@ page model =
 playerEditPage : Model -> PlayerId -> Html Msg
 playerEditPage model playerId =
   let
-    maybePlayer = model.players |> List.filter (\player -> player.id == playerId ) |> List.head
+    maybePlayer = Result.map (\players -> players |> List.filter (\player -> player.id == playerId ) |> List.head) model.players
   in
     case maybePlayer of
-      Just player -> Html.map PlayersMsg (Players.Edit.view player)
-      Nothing -> notFoundView
+      Ok (Just player) -> Html.map PlayersMsg (Players.Edit.view player)
+      Ok Nothing -> notFoundView
+      Err error -> errorView (toString error)
 
 notFoundView : Html msg
 notFoundView =
     div []
         [ text "Not found" ]
+
+
+errorView : String -> Html msg
+errorView error =
+    div []
+        [ text ("Error occured: " ++ error) ]

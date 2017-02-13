@@ -1,17 +1,22 @@
 module Players.List exposing(..)
 
+import Http
 import Html exposing (..)
 import Html.Events exposing (onClick)
 import Html.Attributes exposing (class)
 import Players.Messages exposing (..)
 import Players.Models exposing (Player)
 
-view : List Player -> Html Msg
-view players =
-  div []
-        [ nav players
-        , list players
-        ]
+view : Result Http.Error (List Player) -> Html Msg
+view playersResult =
+  case playersResult of
+    Ok players ->
+      div []
+            [ nav players
+            , list players
+            ]
+    Err err ->
+      div [] [ text ("Error occurred: " ++ (toString err)) ]
 
 nav : List Player -> Html Msg
 nav players =

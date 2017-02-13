@@ -1,17 +1,18 @@
 module Models exposing(..)
 
+import Http
 import Players.Models exposing (Player)
 import Routing
 
 type alias Model =
   {
-    players : List Player
+    players : Result Http.Error (List Player)
   , route: Routing.Route
   }
 
 initialModel : Routing.Route -> Model
 initialModel route =
   {
-    players = []
+    players = Ok []
   , route = route
   }
