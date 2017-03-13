@@ -5,21 +5,56 @@ var _user$project$Players_Update$updatePlayerInPlayers = F2(
 		};
 		return A2(_elm_lang$core$List$map, select, players);
 	});
+var _user$project$Players_Update$findPlayer = F2(
+	function (players, id) {
+		return _elm_lang$core$List$head(
+			A2(
+				_elm_lang$core$List$filter,
+				function (player) {
+					return _elm_lang$core$Native_Utils.eq(player.id, id);
+				},
+				players));
+	});
+var _user$project$Players_Update$updatePlayer = F3(
+	function (players, id, update) {
+		var maybePlayer = _elm_lang$core$List$head(
+			A2(
+				_elm_lang$core$List$filter,
+				function (player) {
+					return _elm_lang$core$Native_Utils.eq(player.id, id);
+				},
+				players));
+		var _p0 = maybePlayer;
+		if (_p0.ctor === 'Just') {
+			var updatedPlayer = update(_p0._0);
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Result$Ok(players),
+				_1: _user$project$Players_Commands$updatePlayer(updatedPlayer)
+			};
+		} else {
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Result$Ok(players),
+				_1: _elm_lang$core$Platform_Cmd$none
+			};
+		}
+	});
 var _user$project$Players_Update$update = F2(
 	function (msg, playersResult) {
-		var _p0 = msg;
-		switch (_p0.ctor) {
+		var _p1 = msg;
+		switch (_p1.ctor) {
 			case 'OnFetchAll':
-				if (_p0._0.ctor === 'Ok') {
+				if (_p1._0.ctor === 'Ok') {
 					return {
 						ctor: '_Tuple2',
-						_0: _elm_lang$core$Result$Ok(_p0._0._0),
+						_0: _elm_lang$core$Result$Ok(_p1._0._0),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				} else {
 					return {
 						ctor: '_Tuple2',
-						_0: _elm_lang$core$Result$Err(_p0._0._0),
+						_0: _elm_lang$core$Result$Err(_p1._0._0),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				}
@@ -34,52 +69,89 @@ var _user$project$Players_Update$update = F2(
 					ctor: '_Tuple2',
 					_0: playersResult,
 					_1: _elm_lang$navigation$Navigation$newUrl(
-						A2(_elm_lang$core$Basics_ops['++'], '#players/', _p0._0))
+						A2(_elm_lang$core$Basics_ops['++'], '#players/', _p1._0))
 				};
 			case 'ChangeLevel':
-				var _p1 = playersResult;
-				if (_p1.ctor === 'Ok') {
-					var _p4 = _p1._0;
-					var maybePlayer = _elm_lang$core$List$head(
-						A2(
-							_elm_lang$core$List$filter,
-							function (player) {
-								return _elm_lang$core$Native_Utils.eq(player.id, _p0._0);
-							},
-							_p4));
-					var _p2 = maybePlayer;
-					if (_p2.ctor === 'Just') {
-						var _p3 = _p2._0;
+				var _p2 = playersResult;
+				if (_p2.ctor === 'Ok') {
+					return A3(
+						_user$project$Players_Update$updatePlayer,
+						_p2._0,
+						_p1._0,
+						function (player) {
+							return _elm_lang$core$Native_Utils.update(
+								player,
+								{level: player.level + _p1._1});
+						});
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Result$Err(_p2._0),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				}
+			case 'ChangeName':
+				var _p3 = playersResult;
+				if (_p3.ctor === 'Ok') {
+					var _p5 = _p3._0;
+					var _p4 = A2(_user$project$Players_Update$findPlayer, _p5, _p1._0);
+					if (_p4.ctor === 'Just') {
 						var updatedPlayer = _elm_lang$core$Native_Utils.update(
-							_p3,
-							{level: _p3.level + _p0._1});
+							_p4._0,
+							{name: _p1._1});
 						return {
 							ctor: '_Tuple2',
-							_0: _elm_lang$core$Result$Ok(_p4),
-							_1: _user$project$Players_Commands$updatePlayer(updatedPlayer)
+							_0: _elm_lang$core$Result$Ok(
+								A2(_user$project$Players_Update$updatePlayerInPlayers, updatedPlayer, _p5)),
+							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					} else {
 						return {
 							ctor: '_Tuple2',
-							_0: _elm_lang$core$Result$Ok(_p4),
+							_0: _elm_lang$core$Result$Ok(_p5),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					}
 				} else {
 					return {
 						ctor: '_Tuple2',
-						_0: _elm_lang$core$Result$Err(_p1._0),
+						_0: _elm_lang$core$Result$Err(_p3._0),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				}
+			case 'UpdatePlayer':
+				var _p6 = playersResult;
+				if (_p6.ctor === 'Ok') {
+					var _p8 = _p6._0;
+					var _p7 = A2(_user$project$Players_Update$findPlayer, _p8, _p1._0);
+					if (_p7.ctor === 'Just') {
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Result$Ok(_p8),
+							_1: _user$project$Players_Commands$updatePlayer(_p7._0)
+						};
+					} else {
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Result$Ok(_p8),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					}
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Result$Err(_p6._0),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				}
 			default:
-				if (_p0._0.ctor === 'Ok') {
+				if (_p1._0.ctor === 'Ok') {
 					return {
 						ctor: '_Tuple2',
 						_0: A2(
 							_elm_lang$core$Result$map,
 							function (players) {
-								return A2(_user$project$Players_Update$updatePlayerInPlayers, _p0._0._0, players);
+								return A2(_user$project$Players_Update$updatePlayerInPlayers, _p1._0._0, players);
 							},
 							playersResult),
 						_1: _elm_lang$core$Platform_Cmd$none
@@ -87,7 +159,7 @@ var _user$project$Players_Update$update = F2(
 				} else {
 					return {
 						ctor: '_Tuple2',
-						_0: _elm_lang$core$Result$Err(_p0._0._0),
+						_0: _elm_lang$core$Result$Err(_p1._0._0),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				}

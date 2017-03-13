@@ -19,7 +19,7 @@ var _user$project$Update$update = F2(
 				_0: _elm_lang$core$Native_Utils.update(
 					model,
 					{route: newRoute}),
-				_1: _elm_lang$core$Platform_Cmd$none
+				_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Messages$PlayersMsg, _user$project$Players_Commands$fetchAll)
 			};
 		}
 	});

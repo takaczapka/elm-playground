@@ -1,8 +1,8 @@
 module Players.Edit exposing(..)
 
 import Html exposing (..)
-import Html.Attributes exposing (class, value, href)
-import Html.Events exposing (onClick)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import Players.Messages exposing (..)
 import Players.Models exposing (..)
 
@@ -22,7 +22,13 @@ nav model =
 form : Player -> Html Msg
 form player =
     div [ class "m3" ]
-        [ h1 [] [ text player.name ]
+        [ h1 []
+          [
+            text player.name,
+            br [] [],
+            input [ placeholder "name", value player.name, onInput (ChangeName player.id)] [],
+            button [ onClick (UpdatePlayer player.id)] []
+          ]
         , formLevel player
         ]
 

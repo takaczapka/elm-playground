@@ -1,6 +1,13 @@
 var _user$project$Players_Messages$OnPlayerUpdate = function (a) {
 	return {ctor: 'OnPlayerUpdate', _0: a};
 };
+var _user$project$Players_Messages$UpdatePlayer = function (a) {
+	return {ctor: 'UpdatePlayer', _0: a};
+};
+var _user$project$Players_Messages$ChangeName = F2(
+	function (a, b) {
+		return {ctor: 'ChangeName', _0: a, _1: b};
+	});
 var _user$project$Players_Messages$ChangeLevel = F2(
 	function (a, b) {
 		return {ctor: 'ChangeLevel', _0: a, _1: b};

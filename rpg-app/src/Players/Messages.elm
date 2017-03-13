@@ -8,4 +8,6 @@ type Msg
   | ShowPlayers
   | ShowPlayer PlayerId
   | ChangeLevel PlayerId Int
+  | ChangeName PlayerId String
+  | UpdatePlayer PlayerId
   | OnPlayerUpdate (Result Http.Error Player)
