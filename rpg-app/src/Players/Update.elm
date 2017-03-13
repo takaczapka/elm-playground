@@ -10,7 +10,9 @@ update : Msg -> Result Http.Error (List Player) -> ( Result Http.Error (List Pla
 update msg playersResult = case msg of
   OnFetchAll (Ok newPlayers) -> ( Ok newPlayers, Cmd.none )
   OnFetchAll (Err error) -> ( Err error, Cmd.none )
-  ShowPlayers -> ( playersResult, Navigation.newUrl "#players" ) -- TODO could this be done nicer - with no hardcoded string?
+  ShowPlayers -> ( playersResult, Navigation.newUrl "#players" )
+  -- TODO 1) could this be done nicer - with no hardcoded string?
+  -- TODO 2) I wanna a fresh set of players
   ShowPlayer id -> ( playersResult, Navigation.newUrl ("#players/" ++ id) )
   ChangeLevel id howMuch -> case playersResult of
       Ok players ->
